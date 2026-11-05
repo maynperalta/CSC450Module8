@@ -18,7 +18,18 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Hewwo World!");
+		System.out.println("Starting program...");
+		
+		Thread threadOne = new Thread (Main::countUp);
+		threadOne.start();
+		
+		try {
+			threadOne.join();
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+			System.err.println("Thread one was interrupted.");
+			return;
+		}
 
 	}
 
