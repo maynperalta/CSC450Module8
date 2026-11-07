@@ -30,7 +30,16 @@ public class Main {
 			System.err.println("Thread one was interrupted.");
 			return;
 		}
-
+		Thread threadTwo = new Thread (Main::countDown);
+		threadTwo.start();
+		
+		try {
+			threadTwo.join();
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+			System.err.println("Thread two was interrupted.");
+			return;
+		}
+		System.out.println("Both threads finished.");
 	}
-
 }
